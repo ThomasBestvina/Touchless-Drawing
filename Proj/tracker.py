@@ -8,13 +8,13 @@ import json
 
 @exposed
 class tracker(Node):
+	mp_drawing = mp.solutions.drawing_utils
+	mp_drawing_styles = mp.solutions.drawing_styles
+	mp_hands = mp.solutions.hands
 	def _ready(self):
 		self.body_image = []
 		def to_arr_dict(landmarks):
 			if(landmarks is not None):
-				mp_drawing = mp.solutions.drawing_utils
-				mp_drawing_styles = mp.solutions.drawing_styles
-				mp_hands = mp.solutions.hands
 				self.body_image = []
 				count = 0
 				for data_point in landmarks:
@@ -26,9 +26,6 @@ class tracker(Node):
 					tempArr.append([data_point.landmark[mp_hands.HandLandmark.PINKY_TIP].x,data_point.landmark[mp_hands.HandLandmark.PINKY_TIP].x,data_point.landmark[mp_hands.HandLandmark.PINKY_TIP].z])
 					self.body_image.append(tempArr)
 		def tracker():
-			mp_drawing = mp.solutions.drawing_utils
-			mp_drawing_styles = mp.solutions.drawing_styles
-			mp_hands = mp.solutions.hands
 			cap = cv2.VideoCapture(0)
 			with mp_hands.Hands(
 				model_complexity=0,
@@ -73,5 +70,4 @@ class tracker(Node):
 	def update_hand(self,hand,finger,pos):
 		if(self.body_image):
 			return(self.body_image[hand][finger][pos])
-		else:
-			return(0)
+		return(0)
