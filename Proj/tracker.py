@@ -6,12 +6,12 @@ import threading
 
 @exposed
 class tracker(Node):
-	mp_drawing = mp.solutions.drawing_utils
-	mp_drawing_styles = mp.solutions.drawing_styles
-	mp_hands = mp.solutions.hands
 	def _ready(self):
 		self.body_image = []
 		def to_arr_dict(landmarks):
+			mp_drawing = mp.solutions.drawing_utils
+			mp_drawing_styles = mp.solutions.drawing_styles
+			mp_hands = mp.solutions.hands
 			if(landmarks is not None):
 				self.body_image = []
 				count = 0
@@ -24,6 +24,9 @@ class tracker(Node):
 					tempArr.append([data_point.landmark[mp_hands.HandLandmark.PINKY_TIP].x,data_point.landmark[mp_hands.HandLandmark.PINKY_TIP].x,data_point.landmark[mp_hands.HandLandmark.PINKY_TIP].z])
 					self.body_image.append(tempArr)
 		def tracker():
+			mp_drawing = mp.solutions.drawing_utils
+			mp_drawing_styles = mp.solutions.drawing_styles
+			mp_hands = mp.solutions.hands
 			cap = cv2.VideoCapture(0)
 			with mp_hands.Hands(
 				model_complexity=1,
