@@ -23,7 +23,7 @@ class tracker(Node):
 				for data_point in landmarks:
 					tempArr = []
 					tempArr.append([data_point.landmark[mp_hands.HandLandmark.INDEX_FINGER_TIP].x,data_point.landmark[mp_hands.HandLandmark.INDEX_FINGER_TIP].y,data_point.landmark[mp_hands.HandLandmark.INDEX_FINGER_TIP].z])
-					tempArr.append([data_point.landmark[mp_hands.HandLandmark.THUMB_CMC].x,data_point.landmark[mp_hands.HandLandmark.THUMB_CMC].y,data_point.landmark[mp_hands.HandLandmark.THUMB_CMC].z])
+					tempArr.append([data_point.landmark[mp_hands.HandLandmark.THUMB_MCP].x,data_point.landmark[mp_hands.HandLandmark.THUMB_MCP].y,data_point.landmark[mp_hands.HandLandmark.THUMB_MCP].z])
 					tempArr.append([data_point.landmark[mp_hands.HandLandmark.MIDDLE_FINGER_TIP].x,data_point.landmark[mp_hands.HandLandmark.MIDDLE_FINGER_TIP].y,data_point.landmark[mp_hands.HandLandmark.MIDDLE_FINGER_TIP].z])
 					tempArr.append([data_point.landmark[mp_hands.HandLandmark.RING_FINGER_TIP].x,data_point.landmark[mp_hands.HandLandmark.RING_FINGER_TIP].y,data_point.landmark[mp_hands.HandLandmark.RING_FINGER_TIP].z])
 					tempArr.append([data_point.landmark[mp_hands.HandLandmark.PINKY_TIP].x,data_point.landmark[mp_hands.HandLandmark.PINKY_TIP].y,data_point.landmark[mp_hands.HandLandmark.PINKY_TIP].z])
@@ -35,8 +35,8 @@ class tracker(Node):
 			cap = cv2.VideoCapture(0)
 			with mp_hands.Hands(
 				model_complexity=0,
-				min_detection_confidence=0.5,
-				min_tracking_confidence=0.5) as hands:
+				min_detection_confidence=0.7,
+				min_tracking_confidence=0.7) as hands:
 				while cap.isOpened():
 					success, image = cap.read()
 					if not success:
@@ -47,8 +47,8 @@ class tracker(Node):
 
 					# To improve performance, optionally mark the image as not writeable to
 					# pass by reference.
-					image.flags.writeable = False
-					image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+					#image.flags.writeable = False
+					#image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 					results = hands.process(image)
 
 					# Draw the hand annotations on the image.
@@ -67,7 +67,7 @@ class tracker(Node):
 						to_arr_dict(results.multi_hand_landmarks)
 					
 					# Flip the image horizontally for a selfie-view display.
-					cv2.imshow('MediaPipe Hands', cv2.flip(image, 1))
+					#cv2.imshow('MediaPipe Hands', cv2.flip(image, 1))
 					if cv2.waitKey(5) & 0xFF == 27:
 					  break
 			cap.release()
