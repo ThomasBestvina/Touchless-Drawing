@@ -8,6 +8,8 @@ var resolution = OS.get_screen_size()
 
 var x = 0.1
 var y = 0.1
+var z = 0
+var val = 0
 
 func _process(_delta):
 	x = lerp(x,(1-tracker.update_hand(0,0,0)*resolution.x),0.3)
@@ -21,19 +23,10 @@ func _process(_delta):
 	var middle_pip = Vector3(1-tracker.update_hand(0,4,0),tracker.update_hand(0,4,1),tracker.update_hand(0,4,2))
 	var middle_dip = Vector3(1-tracker.update_hand(0,5,0),tracker.update_hand(0,5,1),tracker.update_hand(0,5,2))
 	
-	var z = abs(tracker.update_hand(0,0,2))
-	print(z)
+	z = abs(tracker.update_hand(0,0,2))
+
+	val = DCheck.dotTest((indexFinger-ringFinger).normalized(),(thumbBase-middleFinger).normalized(), (middle_pip-middle_dip).normalized() )
 	
-	#"print(DCheck.distance(thumbBase,indexFinger,middleFinger))"
-	
-	
-	var val = DCheck.dotTest((indexFinger-ringFinger).normalized(),(thumbBase-middleFinger).normalized(), (middle_pip-middle_dip).normalized() )
-	
-	#print(DCheck.angle(indexFinger,middleFinger,thumbBase))
-	
-	#var canDraw = DCheck.distance(thumbBase,indexFinger,middleFinger)
-	
-	#var canDraw = DCheck.dotTest((indexFinger-ringFinger).normalized(),(thumbBase-middleFinger).normalized())
 	
 	if(val == 1):
 		var newPaint = brushtest.instance()
@@ -48,3 +41,4 @@ func _process(_delta):
 		if(z != 0):
 			newEraser.scale = Vector2(z,z)
 	$Sprite2.position = Vector2(x,y)
+

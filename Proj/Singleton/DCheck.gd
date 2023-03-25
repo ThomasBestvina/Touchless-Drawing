@@ -17,7 +17,7 @@ func dotTest(obj1, obj2, obj3):
 	var a = obj1.dot(obj2) #Finger pointed
 	var b = obj2.dot(obj3) #Eraser
 	
-	if(a > -0.3 && b > -0.5):
+	if(a > -0.3 && b > -0.3):
 		return 1
 	if(a > 0.4 && b < -0.3):
 		return 2
