@@ -1,7 +1,7 @@
 extends Node2D
 
 onready var tracker = $Tracker
-var brushtest = preload("res://TempBrush.tscn")
+var brushtest = preload("res://Scenes/TempBrush.tscn")
 
 var resolution = OS.get_screen_size()
 
