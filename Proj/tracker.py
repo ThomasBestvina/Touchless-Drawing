@@ -11,7 +11,6 @@ class tracker(Node):
 	def _ready(self):
 		self.body_image = []
 		def to_arr_dict(landmarks):
-			
 			if(landmarks is not None):
 				mp_drawing = mp.solutions.drawing_utils
 				mp_drawing_styles = mp.solutions.drawing_styles
@@ -19,11 +18,13 @@ class tracker(Node):
 				self.body_image = []
 				count = 0
 				for data_point in landmarks:
-					self.body_image.append([data_point.landmark[mp_hands.HandLandmark.INDEX_FINGER_TIP].x,data_point.landmark[mp_hands.HandLandmark.INDEX_FINGER_TIP].x,data_point.landmark[mp_hands.HandLandmark.INDEX_FINGER_TIP].z])
-					self.body_image.append([data_point.landmark[mp_hands.HandLandmark.THUMB_TIP].x,data_point.landmark[mp_hands.HandLandmark.THUMB_TIP].x,data_point.landmark[mp_hands.HandLandmark.THUMB_TIP].z])
-					self.body_image.append([data_point.landmark[mp_hands.HandLandmark.MIDDLE_FINGER_TIP].x,data_point.landmark[mp_hands.HandLandmark.MIDDLE_FINGER_TIP].x,data_point.landmark[mp_hands.HandLandmark.MIDDLE_FINGER_TIP].z])
-					self.body_image.append([data_point.landmark[mp_hands.HandLandmark.RING_FINGER_TIP].x,data_point.landmark[mp_hands.HandLandmark.RING_FINGER_TIP].x,data_point.landmark[mp_hands.HandLandmark.RING_FINGER_TIP].z])
-					self.body_image.append([data_point.landmark[mp_hands.HandLandmark.PINKY_TIP].x,data_point.landmark[mp_hands.HandLandmark.PINKY_TIP].x,data_point.landmark[mp_hands.HandLandmark.PINKY_TIP].z])
+					tempArr = []
+					tempArr.append([data_point.landmark[mp_hands.HandLandmark.INDEX_FINGER_TIP].x,data_point.landmark[mp_hands.HandLandmark.INDEX_FINGER_TIP].x,data_point.landmark[mp_hands.HandLandmark.INDEX_FINGER_TIP].z])
+					tempArr.append([data_point.landmark[mp_hands.HandLandmark.THUMB_TIP].x,data_point.landmark[mp_hands.HandLandmark.THUMB_TIP].x,data_point.landmark[mp_hands.HandLandmark.THUMB_TIP].z])
+					tempArr.append([data_point.landmark[mp_hands.HandLandmark.MIDDLE_FINGER_TIP].x,data_point.landmark[mp_hands.HandLandmark.MIDDLE_FINGER_TIP].x,data_point.landmark[mp_hands.HandLandmark.MIDDLE_FINGER_TIP].z])
+					tempArr.append([data_point.landmark[mp_hands.HandLandmark.RING_FINGER_TIP].x,data_point.landmark[mp_hands.HandLandmark.RING_FINGER_TIP].x,data_point.landmark[mp_hands.HandLandmark.RING_FINGER_TIP].z])
+					tempArr.append([data_point.landmark[mp_hands.HandLandmark.PINKY_TIP].x,data_point.landmark[mp_hands.HandLandmark.PINKY_TIP].x,data_point.landmark[mp_hands.HandLandmark.PINKY_TIP].z])
+					self.body_image.append(tempArr)
 		def tracker():
 			mp_drawing = mp.solutions.drawing_utils
 			mp_drawing_styles = mp.solutions.drawing_styles
@@ -67,12 +68,11 @@ class tracker(Node):
 					if cv2.waitKey(5) & 0xFF == 27:
 					  break
 			cap.release()
-		thread = threading.Thread(target=tracker, daemon=True)
+		thread = threading.Thread(target=tracker)#, daemon=True)
 		thread.start()
 	def update_hand(self,hand,finger,pos):
-		print(self.body_image)
-		if(len(self.body_image) > index):
-			#return(self.body_image[hand][finger][pos])
-			return(1)
+		#print(self.body_image)
+		if(self.body_image):
+			return(self.body_image[hand][finger][pos])
 		else:
 			return(0)
