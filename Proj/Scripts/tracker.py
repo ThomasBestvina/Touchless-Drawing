@@ -78,3 +78,5 @@ class tracker(Node):
 		if(self.body_image):
 			return(self.body_image[hand][finger][pos])
 		return(0)
+	def hand_count(self):
+		return(len(self.body_image))

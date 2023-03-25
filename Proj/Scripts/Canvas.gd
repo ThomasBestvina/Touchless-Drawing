@@ -27,19 +27,22 @@ func _process(_delta):
 
 	val = DCheck.dotTest((indexFinger-ringFinger).normalized(),(thumbBase-middleFinger).normalized(), (middle_pip-middle_dip).normalized() )
 	
-	
-	if(val == 1):
-		var newPaint = brushtest.instance()
-		add_child(newPaint)
-		newPaint.position = Vector2(x,y)
-		if(z != 0):
-			newPaint.scale = Vector2(z*10,z*10)
-	if(val == 2):
-		var newEraser = eraser.instance()
-		add_child(newEraser)
-		newEraser.position = Vector2(x,y)
-		if(z != 0):
-			newEraser.scale = Vector2(z,z)
-	$Sprite2.position = Vector2(x,y)
-	$Sprite2.rotation_degrees += 1
+	if(tracker.hand_count() >= 2):
+		$Sprite3.visible = true
+	else:
+		$Sprite3.visible = false
+		if(val == 1):
+			var newPaint = brushtest.instance()
+			add_child(newPaint)
+			newPaint.position = Vector2(x,y)
+			if(z != 0):
+				newPaint.scale = Vector2(z*10,z*10)
+		if(val == 2):
+			var newEraser = eraser.instance()
+			add_child(newEraser)
+			newEraser.position = Vector2(x,y)
+			if(z != 0):
+				newEraser.scale = Vector2(z,z)
+		$Sprite2.position = Vector2(x,y)
+		$Sprite2.rotation_degrees += 1
 

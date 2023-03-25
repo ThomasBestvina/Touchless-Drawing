@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scripts/tracker.py" type="Script" id=1]
 [ext_resource path="res://Scripts/Canvas.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Solid_white.svg.webp" type="Texture" id=3]
 [ext_resource path="res://Assets/crosshair21.png" type="Texture" id=4]
+[ext_resource path="res://Assets/2OrMoreHands.png" type="Texture" id=5]
 
 [node name="Canvas" type="Node2D"]
 script = ExtResource( 2 )
@@ -24,3 +25,9 @@ current = true
 scale = Vector2( 0.5, 0.5 )
 z_index = 10
 texture = ExtResource( 4 )
+
+[node name="Sprite3" type="Sprite" parent="."]
+visible = false
+position = Vector2( -744, 306 )
+z_index = 12
+texture = ExtResource( 5 )
