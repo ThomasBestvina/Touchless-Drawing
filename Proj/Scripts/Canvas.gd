@@ -10,6 +10,9 @@ var x = 0.1
 var y = 0.1
 var z = 0
 var val = 0
+var count = 0
+
+var instancecount = 0
 
 func _process(_delta):
 	x = lerp(x,(1-tracker.update_hand(0,0,0)*resolution.x),0.3)
@@ -28,8 +31,11 @@ func _process(_delta):
 	val = DCheck.dotTest((indexFinger-ringFinger).normalized(),(thumbBase-middleFinger).normalized(), (middle_pip-middle_dip).normalized() )
 	
 	if(tracker.hand_count() >= 2):
-		$Sprite3.visible = true
+		count += 1
+		if(count > 30):
+			$Sprite3.visible = true
 	else:
+		count = 0
 		$Sprite3.visible = false
 		if(val == 1):
 			var newPaint = brushtest.instance()
