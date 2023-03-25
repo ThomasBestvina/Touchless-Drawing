@@ -9,8 +9,8 @@
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( -572.5, 0 )
-scale = Vector2( 1.55908, 1 )
+position = Vector2( -753.5, 550 )
+scale = Vector2( 3.28076, 2.39355 )
 texture = ExtResource( 3 )
 
 [node name="Tracker" type="Node" parent="."]
