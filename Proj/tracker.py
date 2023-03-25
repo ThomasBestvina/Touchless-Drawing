@@ -3,8 +3,6 @@ from godot import *
 import cv2
 import mediapipe as mp
 import threading
-import json
-
 
 @exposed
 class tracker(Node):
@@ -19,10 +17,10 @@ class tracker(Node):
 				count = 0
 				for data_point in landmarks:
 					tempArr = []
-					tempArr.append([data_point.landmark[mp_hands.HandLandmark.INDEX_FINGER_TIP].x,data_point.landmark[mp_hands.HandLandmark.INDEX_FINGER_TIP].x,data_point.landmark[mp_hands.HandLandmark.INDEX_FINGER_TIP].z])
-					tempArr.append([data_point.landmark[mp_hands.HandLandmark.THUMB_TIP].x,data_point.landmark[mp_hands.HandLandmark.THUMB_TIP].x,data_point.landmark[mp_hands.HandLandmark.THUMB_TIP].z])
-					tempArr.append([data_point.landmark[mp_hands.HandLandmark.MIDDLE_FINGER_TIP].x,data_point.landmark[mp_hands.HandLandmark.MIDDLE_FINGER_TIP].x,data_point.landmark[mp_hands.HandLandmark.MIDDLE_FINGER_TIP].z])
-					tempArr.append([data_point.landmark[mp_hands.HandLandmark.RING_FINGER_TIP].x,data_point.landmark[mp_hands.HandLandmark.RING_FINGER_TIP].x,data_point.landmark[mp_hands.HandLandmark.RING_FINGER_TIP].z])
+					tempArr.append([data_point.landmark[mp_hands.HandLandmark.INDEX_FINGER_TIP].x,data_point.landmark[mp_hands.HandLandmark.INDEX_FINGER_TIP].y,data_point.landmark[mp_hands.HandLandmark.INDEX_FINGER_TIP].z])
+					tempArr.append([data_point.landmark[mp_hands.HandLandmark.THUMB_TIP].x,data_point.landmark[mp_hands.HandLandmark.THUMB_TIP].y,data_point.landmark[mp_hands.HandLandmark.THUMB_TIP].z])
+					tempArr.append([data_point.landmark[mp_hands.HandLandmark.MIDDLE_FINGER_TIP].x,data_point.landmark[mp_hands.HandLandmark.MIDDLE_FINGER_TIP].y,data_point.landmark[mp_hands.HandLandmark.MIDDLE_FINGER_TIP].z])
+					tempArr.append([data_point.landmark[mp_hands.HandLandmark.RING_FINGER_TIP].x,data_point.landmark[mp_hands.HandLandmark.RING_FINGER_TIP].y,data_point.landmark[mp_hands.HandLandmark.RING_FINGER_TIP].z])
 					tempArr.append([data_point.landmark[mp_hands.HandLandmark.PINKY_TIP].x,data_point.landmark[mp_hands.HandLandmark.PINKY_TIP].x,data_point.landmark[mp_hands.HandLandmark.PINKY_TIP].z])
 					self.body_image.append(tempArr)
 		def tracker():
@@ -31,7 +29,7 @@ class tracker(Node):
 			mp_hands = mp.solutions.hands
 			cap = cv2.VideoCapture(0)
 			with mp_hands.Hands(
-				model_complexity=0,
+				model_complexity=1,
 				min_detection_confidence=0.5,
 				min_tracking_confidence=0.5) as hands:
 				while cap.isOpened():
