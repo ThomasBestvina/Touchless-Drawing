@@ -14,10 +14,6 @@ config/name="USUHack"
 run/main_scene="res://Canvas.tscn"
 config/icon="res://icon.png"
 
-[autoload]
-
-Tracker="*res://Singleton/tracker.py"
-
 [gdnative]
 
 singletons=[ "res://pythonscript.gdnlib" ]

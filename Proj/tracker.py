@@ -3,6 +3,8 @@ from godot import *
 import cv2
 import mediapipe as mp
 import threading
+import json
+
 
 @exposed
 class tracker(Node):
@@ -12,7 +14,10 @@ class tracker(Node):
 			if(landmarks is not None):
 				self.body_image = []
 				for data_point in landmarks:
-					self.body_image.append([data_point.x,data_point.y,data_point.z,data_point.visibility])
+					tempStr = str(landmarks.landmark).split()
+					x = tempStr[1][0:len(tempStr[1])-2]
+					y = tempStr[3][0:len(tempStr[3])-2]
+					
 		def tracker():
 			mp_drawing = mp.solutions.drawing_utils
 			mp_drawing_styles = mp.solutions.drawing_styles
@@ -41,13 +46,15 @@ class tracker(Node):
 					image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
 					if results.multi_hand_landmarks:
 						for hand_landmarks in results.multi_hand_landmarks:
+							
 							mp_drawing.draw_landmarks(
 								image,
 								hand_landmarks,
 								mp_hands.HAND_CONNECTIONS,
 								mp_drawing_styles.get_default_hand_landmarks_style(),
 								mp_drawing_styles.get_default_hand_connections_style())
-					to_arr_dict(results.multi_hand_landmarks)
+					#to_arr_dict(results.multi_hand_landmarks)
+					
 					# Flip the image horizontally for a selfie-view display.
 					cv2.imshow('MediaPipe Hands', cv2.flip(image, 1))
 					if cv2.waitKey(5) & 0xFF == 27:
