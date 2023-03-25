@@ -6,14 +6,13 @@ import threading
 
 @exposed
 class tracker(Node):
-
-	# member variables here, example:
-	a = export(int)
-	b = export(str, default='foo')
-	
-
 	def _ready(self):
-		#def to_arr_dict()
+		self.body_image = []
+		def to_arr_dict(landmarks):
+			if(landmarks is not None):
+				self.body_image = []
+				for data_point in landmarks:
+					self.body_image.append([data_point.x,data_point.y,data_point.z,data_point.visibility])
 		def tracker():
 			mp_drawing = mp.solutions.drawing_utils
 			mp_drawing_styles = mp.solutions.drawing_styles
@@ -40,7 +39,6 @@ class tracker(Node):
 					# Draw the hand annotations on the image.
 					image.flags.writeable = True
 					image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
-					print(results.multi_hand_landmarks)
 					if results.multi_hand_landmarks:
 						for hand_landmarks in results.multi_hand_landmarks:
 							mp_drawing.draw_landmarks(
@@ -49,7 +47,7 @@ class tracker(Node):
 								mp_hands.HAND_CONNECTIONS,
 								mp_drawing_styles.get_default_hand_landmarks_style(),
 								mp_drawing_styles.get_default_hand_connections_style())
-							
+					to_arr_dict(results.multi_hand_landmarks)
 					# Flip the image horizontally for a selfie-view display.
 					cv2.imshow('MediaPipe Hands', cv2.flip(image, 1))
 					if cv2.waitKey(5) & 0xFF == 27:
@@ -57,3 +55,8 @@ class tracker(Node):
 			cap.release()
 		thread = threading.Thread(target=tracker, daemon=True)
 		thread.start()
+	def update_hand(self,index,pos):
+		if(len(self.body_image) > index):
+			return(self.body_image[index][pos])
+		else:
+			return(0)
