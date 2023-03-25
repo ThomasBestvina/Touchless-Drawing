@@ -11,13 +11,19 @@ class tracker(Node):
 	def _ready(self):
 		self.body_image = []
 		def to_arr_dict(landmarks):
+			
 			if(landmarks is not None):
+				mp_drawing = mp.solutions.drawing_utils
+				mp_drawing_styles = mp.solutions.drawing_styles
+				mp_hands = mp.solutions.hands
 				self.body_image = []
+				count = 0
 				for data_point in landmarks:
-					tempStr = str(landmarks.landmark).split()
-					x = tempStr[1][0:len(tempStr[1])-2]
-					y = tempStr[3][0:len(tempStr[3])-2]
-					
+					self.body_image.append([data_point.landmark[mp_hands.HandLandmark.INDEX_FINGER_TIP].x,data_point.landmark[mp_hands.HandLandmark.INDEX_FINGER_TIP].x,data_point.landmark[mp_hands.HandLandmark.INDEX_FINGER_TIP].z])
+					self.body_image.append([data_point.landmark[mp_hands.HandLandmark.THUMB_TIP].x,data_point.landmark[mp_hands.HandLandmark.THUMB_TIP].x,data_point.landmark[mp_hands.HandLandmark.THUMB_TIP].z])
+					self.body_image.append([data_point.landmark[mp_hands.HandLandmark.MIDDLE_FINGER_TIP].x,data_point.landmark[mp_hands.HandLandmark.MIDDLE_FINGER_TIP].x,data_point.landmark[mp_hands.HandLandmark.MIDDLE_FINGER_TIP].z])
+					self.body_image.append([data_point.landmark[mp_hands.HandLandmark.RING_FINGER_TIP].x,data_point.landmark[mp_hands.HandLandmark.RING_FINGER_TIP].x,data_point.landmark[mp_hands.HandLandmark.RING_FINGER_TIP].z])
+					self.body_image.append([data_point.landmark[mp_hands.HandLandmark.PINKY_TIP].x,data_point.landmark[mp_hands.HandLandmark.PINKY_TIP].x,data_point.landmark[mp_hands.HandLandmark.PINKY_TIP].z])
 		def tracker():
 			mp_drawing = mp.solutions.drawing_utils
 			mp_drawing_styles = mp.solutions.drawing_styles
@@ -45,15 +51,16 @@ class tracker(Node):
 					image.flags.writeable = True
 					image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
 					if results.multi_hand_landmarks:
+						count = 0
 						for hand_landmarks in results.multi_hand_landmarks:
-							
+							count += 1
 							mp_drawing.draw_landmarks(
 								image,
 								hand_landmarks,
 								mp_hands.HAND_CONNECTIONS,
 								mp_drawing_styles.get_default_hand_landmarks_style(),
 								mp_drawing_styles.get_default_hand_connections_style())
-					#to_arr_dict(results.multi_hand_landmarks)
+						to_arr_dict(results.multi_hand_landmarks)
 					
 					# Flip the image horizontally for a selfie-view display.
 					cv2.imshow('MediaPipe Hands', cv2.flip(image, 1))
@@ -62,8 +69,10 @@ class tracker(Node):
 			cap.release()
 		thread = threading.Thread(target=tracker, daemon=True)
 		thread.start()
-	def update_hand(self,index,pos):
+	def update_hand(self,hand,finger,pos):
+		print(self.body_image)
 		if(len(self.body_image) > index):
-			return(self.body_image[index][pos])
+			#return(self.body_image[hand][finger][pos])
+			return(1)
 		else:
 			return(0)
