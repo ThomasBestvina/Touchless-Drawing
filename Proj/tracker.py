@@ -74,5 +74,4 @@ class tracker(Node):
 		if(len(self.body_image) > index):
 			#return(self.body_image[hand][finger][pos])
 			return(1)
-		else:
-			return(0)
+		return(0)
