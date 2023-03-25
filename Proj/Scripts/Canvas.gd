@@ -21,6 +21,9 @@ func _process(_delta):
 	var middle_pip = Vector3(1-tracker.update_hand(0,4,0),tracker.update_hand(0,4,1),tracker.update_hand(0,4,2))
 	var middle_dip = Vector3(1-tracker.update_hand(0,5,0),tracker.update_hand(0,5,1),tracker.update_hand(0,5,2))
 	
+	var z = abs(tracker.update_hand(0,0,2))
+	print(z)
+	
 	#"print(DCheck.distance(thumbBase,indexFinger,middleFinger))"
 	
 	
@@ -36,7 +39,12 @@ func _process(_delta):
 		var newPaint = brushtest.instance()
 		add_child(newPaint)
 		newPaint.position = Vector2(x,y)
+		if(z != 0):
+			newPaint.scale = Vector2(z*10,z*10)
 	if(val == 2):
 		var newEraser = eraser.instance()
 		add_child(newEraser)
 		newEraser.position = Vector2(x,y)
+		if(z != 0):
+			newEraser.scale = Vector2(z,z)
+	$Sprite2.position = Vector2(x,y)
