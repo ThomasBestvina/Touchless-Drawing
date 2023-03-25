@@ -26,7 +26,8 @@ class tracker(Node):
 					tempArr.append([data_point.landmark[mp_hands.HandLandmark.THUMB_MCP].x,data_point.landmark[mp_hands.HandLandmark.THUMB_MCP].y,data_point.landmark[mp_hands.HandLandmark.THUMB_MCP].z])
 					tempArr.append([data_point.landmark[mp_hands.HandLandmark.THUMB_CMC].x,data_point.landmark[mp_hands.HandLandmark.THUMB_CMC].y,data_point.landmark[mp_hands.HandLandmark.THUMB_CMC].z])
 					tempArr.append([data_point.landmark[mp_hands.HandLandmark.INDEX_FINGER_DIP].x,data_point.landmark[mp_hands.HandLandmark.INDEX_FINGER_DIP].y,data_point.landmark[mp_hands.HandLandmark.INDEX_FINGER_DIP].z])
-					tempArr.append([data_point.landmark[mp_hands.HandLandmark.PINKY_TIP].x,data_point.landmark[mp_hands.HandLandmark.PINKY_TIP].y,data_point.landmark[mp_hands.HandLandmark.PINKY_TIP].z])
+					tempArr.append([data_point.landmark[mp_hands.HandLandmark.MIDDLE_FINGER_PIP].x,data_point.landmark[mp_hands.HandLandmark.MIDDLE_FINGER_PIP].y,data_point.landmark[mp_hands.HandLandmark.MIDDLE_FINGER_PIP].z])
+					tempArr.append([data_point.landmark[mp_hands.HandLandmark.MIDDLE_FINGER_DIP].x,data_point.landmark[mp_hands.HandLandmark.MIDDLE_FINGER_DIP].y,data_point.landmark[mp_hands.HandLandmark.MIDDLE_FINGER_DIP].z])
 					self.body_image.append(tempArr)
 		def tracker():
 			mp_drawing = mp.solutions.drawing_utils
@@ -34,9 +35,9 @@ class tracker(Node):
 			mp_hands = mp.solutions.hands
 			cap = cv2.VideoCapture(0)
 			with mp_hands.Hands(
-				model_complexity=0,
-				min_detection_confidence=0.7,
-				min_tracking_confidence=0.7) as hands:
+				model_complexity=1,
+				min_detection_confidence=0.5,
+				min_tracking_confidence=0.5) as hands:
 				while cap.isOpened():
 					success, image = cap.read()
 					if not success:
