@@ -23,7 +23,7 @@ class tracker(Node):
 				for data_point in landmarks:
 					tempArr = []
 					tempArr.append([data_point.landmark[mp_hands.HandLandmark.INDEX_FINGER_TIP].x,data_point.landmark[mp_hands.HandLandmark.INDEX_FINGER_TIP].y,data_point.landmark[mp_hands.HandLandmark.INDEX_FINGER_TIP].z])
-					tempArr.append([data_point.landmark[mp_hands.HandLandmark.THUMB_TIP].x,data_point.landmark[mp_hands.HandLandmark.THUMB_TIP].y,data_point.landmark[mp_hands.HandLandmark.THUMB_TIP].z])
+					tempArr.append([data_point.landmark[mp_hands.HandLandmark.THUMB_CMC].x,data_point.landmark[mp_hands.HandLandmark.THUMB_CMC].y,data_point.landmark[mp_hands.HandLandmark.THUMB_CMC].z])
 					tempArr.append([data_point.landmark[mp_hands.HandLandmark.MIDDLE_FINGER_TIP].x,data_point.landmark[mp_hands.HandLandmark.MIDDLE_FINGER_TIP].y,data_point.landmark[mp_hands.HandLandmark.MIDDLE_FINGER_TIP].z])
 					tempArr.append([data_point.landmark[mp_hands.HandLandmark.RING_FINGER_TIP].x,data_point.landmark[mp_hands.HandLandmark.RING_FINGER_TIP].y,data_point.landmark[mp_hands.HandLandmark.RING_FINGER_TIP].z])
 					tempArr.append([data_point.landmark[mp_hands.HandLandmark.PINKY_TIP].x,data_point.landmark[mp_hands.HandLandmark.PINKY_TIP].y,data_point.landmark[mp_hands.HandLandmark.PINKY_TIP].z])
