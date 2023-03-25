@@ -10,10 +10,8 @@ var y = 0.1
 
 func _process(_delta):
 	
-	x = lerp(x,(1-tracker.update_hand(0,0,0)*1024),0.3)
-	y = lerp(y,tracker.update_hand(0,0,1)*600,0.3)
+	x = lerp(x,(1-tracker.update_hand(0,0,0)*resolution.x),0.3)
+	y = lerp(y,tracker.update_hand(0,0,1)*resolution.y,0.3)
 	var newPaint = brushtest.instance()
 	add_child(newPaint)
 	newPaint.position = Vector2(x,y)
-	
-

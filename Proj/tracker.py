@@ -11,6 +11,9 @@ class tracker(Node):
 	def _ready(self):
 		self.body_image = []
 		def to_arr_dict(landmarks):
+			mp_drawing = mp.solutions.drawing_utils
+			mp_drawing_styles = mp.solutions.drawing_styles
+			mp_hands = mp.solutions.hands
 			if(landmarks is not None):
 				mp_drawing = mp.solutions.drawing_utils
 				mp_drawing_styles = mp.solutions.drawing_styles
