@@ -41,4 +41,5 @@ func _process(_delta):
 		if(z != 0):
 			newEraser.scale = Vector2(z,z)
 	$Sprite2.position = Vector2(x,y)
+	$Sprite2.rotation_degrees += 1
 
