@@ -71,7 +71,6 @@ class tracker(Node):
 		thread = threading.Thread(target=tracker)#, daemon=True)
 		thread.start()
 	def update_hand(self,hand,finger,pos):
-		#print(self.body_image)
 		if(self.body_image):
 			return(self.body_image[hand][finger][pos])
 		else:
