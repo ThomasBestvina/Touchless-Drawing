@@ -23,9 +23,9 @@ func _process(_delta):
 	
 	#print(DCheck.angle(indexFinger,middleFinger,thumbBase))
 	
-	var canDraw = DCheck.distance(thumbBase,indexFinger,middleFinger)
+	#var canDraw = DCheck.distance(thumbBase,indexFinger,middleFinger)
 	
-	
+	var canDraw = DCheck.dotTest((indexFinger-ringFinger).normalized(),(thumbBase-middleFinger).normalized())
 	
 	if(canDraw):
 		var newPaint = brushtest.instance()

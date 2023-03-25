@@ -13,6 +13,17 @@ func distance(obj1, obj2, obj3):
 		return true
 	return false
 	
+func dotTest(obj1, obj2):
+	print(obj1.dot(obj2))
+	if((obj1).dot(obj2) > 0.5):
+		return true
+	return false
+	
+	
+
+func dotProd(obj1, obj2):
+	return obj1.x*obj2.x + obj1.y*obj2.y + obj1.z*obj2.z
+
 func distance2 (obj1, obj2):
 	var dx = obj2.x - obj1.x
 	var dy = obj2.y - obj1.y
