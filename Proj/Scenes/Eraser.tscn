@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Assets/Solid_white.svg.webp" type="Texture" id=1]
+
+[node name="Sprite" type="Sprite"]
+scale = Vector2( 0.025, 0.025 )
+texture = ExtResource( 1 )

@@ -47,8 +47,8 @@ class tracker(Node):
 
 					# To improve performance, optionally mark the image as not writeable to
 					# pass by reference.
-					#image.flags.writeable = False
-					#image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+					image.flags.writeable = False
+					image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 					results = hands.process(image)
 
 					# Draw the hand annotations on the image.
@@ -67,7 +67,7 @@ class tracker(Node):
 						to_arr_dict(results.multi_hand_landmarks)
 					
 					# Flip the image horizontally for a selfie-view display.
-					#cv2.imshow('MediaPipe Hands', cv2.flip(image, 1))
+					cv2.imshow('MediaPipe Hands', cv2.flip(image, 1))
 					if cv2.waitKey(5) & 0xFF == 27:
 					  break
 			cap.release()

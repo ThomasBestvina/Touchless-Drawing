@@ -2,7 +2,6 @@ extends Node2D
 
 onready var tracker = $Tracker
 var brushtest = preload("res://Scenes/TempBrush.tscn")
-var eraser = preload("res://Scenes/Eraser.tscn")
 
 var resolution = OS.get_screen_size()
 
@@ -31,7 +30,3 @@ func _process(_delta):
 		var newPaint = brushtest.instance()
 		add_child(newPaint)
 		newPaint.position = Vector2(x,y)
-	else:
-		var newEraser = eraser.instance()
-		add_child(newEraser)
-		newEraser.position = Vector2(x,y)
