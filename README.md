@@ -1,2 +1,2 @@
-Build for Utah State University Hackathon
+Built for Utah State University Hackathon
  
